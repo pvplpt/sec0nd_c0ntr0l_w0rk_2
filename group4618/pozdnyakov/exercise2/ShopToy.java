@@ -3,6 +3,7 @@ package group4618.pozdnyakov.exercise2;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class ShopToy {
@@ -23,14 +24,31 @@ public class ShopToy {
 
     public void saveToFile(String filename, Toy toy) {
         File resultFile = new File(filename);
-        try (FileWriter fileWriter = new FileWriter(resultFile)) {
+        try (FileWriter fileWriter = new FileWriter(resultFile, true)) {
             String text = "";
             if (toy == null) {
-                text = "Очередь пуста";
+                text = "Очередь пуста\n";
             } else {
-                text = toy.toString();
+                text = toy.toString() + "\n";
             }
             fileWriter.write(text);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveArrayToFile(String filename, ArrayList<Toy> arr) {
+        File resultFile = new File(filename);
+        try (FileWriter fileWriter = new FileWriter(resultFile)) {
+            for (Toy toy : arr) {
+                String text = "";
+                if (toy == null) {
+                    text = "Очередь пуста\n";
+                } else {
+                    text = toy.toString() + "\n";
+                }
+                fileWriter.write(text);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
